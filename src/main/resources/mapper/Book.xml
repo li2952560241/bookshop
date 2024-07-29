@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--MyBatis映射文件定义了与BookDAO接口相关的SQL映射，包括CRUD操作和一些自定义查询-->
+<mapper namespace="com.daniel.dao.BookDAO">
+    <!--指定了映射的命名空间，对应于BookDAO接口的全限定名。-->
+    <resultMap id="bookResultMap" type="Book">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="bookType" property="bookType" />
+        <result column="price" property="price" />
+        <result column="originalPrice" property="originalPrice" />
+        <result column="author" property="author" />
+        <result column="press" property="press" />
+        <result column="version" property="version" />
+        <result column="degree" property="degree" />
+        <result column="publishDate" property="publishDate" />
+        <result column="description" property="description" />
+        <result column="date" property="date" />
+        <association property="user" javaType="User">
+            <id column="id" property="id" />
+        </association>
+        <association property="category" javaType="Category">
+            <id column="cid" property="id" />
+        </association>
+    </resultMap>
+<!--    定义了如何将数据库的结果集映射到Book实体，包括与User和Category实体的关联。-->
+
+    
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="Book" >
+        insert into book
+        ( name,bookType,author,cid,originalPrice,price,press,publishDate,version,degree,description,uid,date)
+        values
+        (#{name},#{bookType},#{author},#{category.id},#{originalPrice},#{price},#{press},#{publishDate},#{version},#{degree},#{description},#{user.id},#{date})
+    </insert>
+<!--    这个插入语句将add方法映射到SQL插入操作，useGeneratedKeys属性设置为true，以自动获取生成的主键。-->
+
+    <delete id="delete" parameterType="_int" >
+        delete from book where id= #{id}
+    </delete>
+<!--这个删除语句将delete方法映射到基于书籍ID的SQL删除操作。-->
+
+    <select id="get" parameterType="_int" resultMap="bookResultMap">
+        select * from   book  where id= #{id}
+    </select>
+<!--    这个查询语句将get方法映射到基于书籍ID的SQL查询操作，并使用bookResultMap结果映射。-->
+
+    <update id="update" parameterType="Book" >
+        update book set name=#{name},cid=#{category.id},originalPrice=#{originalPrice},price=#{price},
+        press=#{press},publishDate=#{publishDate},version=#{version},degree=#{degree},description=#{description} where id=#{id}
+    </update>
+<!--    这个更新语句将update方法映射到SQL更新操作，更新书籍的详细信息。-->
+
+    <select id="list" resultType="Book">
+        select * from  book
+    </select>
+<!--    这个查询语句将list方法映射到获取所有书籍的SQL查询操作。-->
+
+    <select id="listByBookType" resultType="Book">
+        select * from book where bookType=#{bookType} order by date desc
+    </select>
+<!--这个查询语句将listByBookType方法映射到按书籍类型获取书籍的SQL查询操作，并按日期降序排列。-->
+
+    <select id="count" resultType="_int">
+        select count(id) from book
+    </select>
+<!--这个查询语句将count方法映射到获取书籍总数的SQL查询操作。-->
+
+    <select id="getListByCategoryId" resultMap="bookResultMap">
+        select * from book where cid = #{cid} and bookType = #{bookType} order by date desc
+        <if test="start != -1">
+          limit #{start},#{count}
+        </if>
+    </select>
+<!--    这个查询语句将getListByCategoryId方法映射到按分类ID和书籍类型获取书籍的SQL查询操作，如果start不等于-1，则使用分页查询-->
+
+    <select id="getListByUserId" resultType="Book">
+        select * from book where uid = #{uid} and bookType = #{bookType} order by date desc
+    </select>
+<!--这个查询语句将getListByUserId方法映射到按用户ID和书籍类型获取书籍的SQL查询操作。-->
+    <select id="getUserId" resultType="_int">
+        select uid from book where id = #{id}
+    </select>
+</mapper>

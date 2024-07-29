@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.daniel.dao.UserDAO">
+
+    <select id="get" parameterType="_int" resultType="User">
+        select * from user where id= #{id}
+    </select>
+
+    <select id="getByStudentid" resultType="User">
+        select * from user where studentid= #{studentid}
+    </select>
+
+    <update id="update" parameterType="User" >
+        update user set name=#{name} where id=#{id}
+    </update>
+
+<!--    先验证学号和密码是否正确，在进行更新操作-->
+    <select id="checkTel" parameterType="User" resultType="int">
+        select count(*) from user where studentid = #{studentid}and tel = #{tel}
+    </select>
+    <update id="updateReset" parameterType="User">
+        update user set password=#{password} where studentid = #{studentid}
+    </update>
+
+
+    <!--id="checkPassword":MyBatis 映射文件中定义的方法名，调用该查询时会使用这个 ID。
+    parameterType="User":，表示该查询方法接受一个 User 对象作为参数。
+    MyBatis 会根据这个参数类型来解析 #{studentid} 和 #{password} 占位符的值。
+    resultType="int":这是查询结果的返回类型，表示查询返回一个 int 类型的结果。-->
+    <select id="checkPassword" parameterType="User" resultType="int">
+        select count(*) from user where studentid = #{studentid} and password = #{password}
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        INSERT INTO user (studentid, name, password, sex, tel, address, major)
+        VALUES (#{studentid}, #{name}, #{password}, #{sex}, #{tel}, #{address}, #{major})
+    </insert>
+
+
+<!--    编辑个人信息-->
+
+
+    <update id="updateUser" parameterType="User">
+        UPDATE user
+        SET studentid = #{studentid},
+            name = #{name},
+            password = #{password},
+            sex = #{sex},
+            tel = #{tel},
+            address = #{address},
+            major = #{major}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
