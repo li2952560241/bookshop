@@ -1,17 +1,17 @@
 /*
- Navicat Premium Data Transfer
+ Navicat Premium Dump SQL
 
- Source Server         : demo
+ Source Server         : mysql5
  Source Server Type    : MySQL
- Source Server Version : 50722
+ Source Server Version : 50726 (5.7.26)
  Source Host           : localhost:3306
  Source Schema         : bookshop
 
  Target Server Type    : MySQL
- Target Server Version : 50722
+ Target Server Version : 50726 (5.7.26)
  File Encoding         : 65001
 
- Date: 19/07/2018 20:56:32
+ Date: 29/07/2024 17:16:49
 */
 
 SET NAMES utf8mb4;
@@ -23,19 +23,19 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `book`;
 CREATE TABLE `book`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `cid` int(10) DEFAULT NULL,
-  `bookType` int(1) DEFAULT NULL,
-  `price` double(10, 2) DEFAULT NULL,
-  `originalPrice` double(10, 2) DEFAULT NULL,
-  `uid` int(11) DEFAULT NULL,
-  `author` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `press` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `version` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `degree` double(2, 1) DEFAULT NULL,
-  `publishDate` varchar(7) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_general_ci,
-  `date` datetime(0) DEFAULT NULL,
+  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `cid` int(10) NULL DEFAULT NULL,
+  `bookType` int(1) NULL DEFAULT NULL,
+  `price` double(10, 2) NULL DEFAULT NULL,
+  `originalPrice` double(10, 2) NULL DEFAULT NULL,
+  `uid` int(11) NULL DEFAULT NULL,
+  `author` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `press` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `version` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `degree` double(2, 1) NULL DEFAULT NULL,
+  `publishDate` varchar(7) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `date` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `index_id`(`id`) USING BTREE,
   INDEX `fk_book_category`(`cid`) USING BTREE,
@@ -45,7 +45,7 @@ CREATE TABLE `book`  (
   INDEX `index_uid`(`uid`) USING BTREE,
   CONSTRAINT `fk_book_category` FOREIGN KEY (`cid`) REFERENCES `category` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_book_user` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 89 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 98 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of book
@@ -69,7 +69,6 @@ INSERT INTO `book` VALUES (16, '天才在左 疯子在右', 4, 1, 17.80, 36.00, 
 INSERT INTO `book` VALUES (17, '蔡康永的说话之道', 4, 1, 8.80, 29.00, 1, '蔡康永', '沈阳出版社', '平装', 7.4, '2010-10', '蔡康永 著 / 沈阳出版社 / 2010-10 / 平装', '2018-04-12 08:44:29');
 INSERT INTO `book` VALUES (18, '货币战争', 5, 1, 12.00, 34.00, 1, '宋鸿兵', '中信出版社', '平装', 6.0, '2007-06', '宋鸿兵 著 / 中信出版社 / 2007-06 / 平装', '2018-04-12 08:46:34');
 INSERT INTO `book` VALUES (19, '菊与刀', 5, 1, 5.00, 19.00, 2, '鲁思·本尼迪克特', '商务印书馆', '平装', 7.0, '1990-06', '鲁思·本尼迪克特 著 / 商务印书馆 / 1990-06 / 平装', '2018-04-12 08:47:40');
-INSERT INTO `book` VALUES (20, '科比：黄金年代', 6, 1, 22.00, 49.00, 1, '张佳玮', '金城出版社', '平装', 7.0, '2016-06', '张佳玮 著 / 金城出版社 / 2016-06 / 平装', '2018-04-12 08:44:46');
 INSERT INTO `book` VALUES (21, '梅者如西', 6, 1, 12.00, 34.00, 1, '冯逸明', '北京时代华文书局', '平装', 7.0, '2017-07', '冯逸明 著 / 北京时代华文书局 / 2017-07 / 平装', '2018-04-12 08:49:52');
 INSERT INTO `book` VALUES (62, '精通Spring4.x', 7, 1, 30.00, 79.00, 1, '陈雄华', '电子工业出版社', '4', 9.9, '2016-11', '保证正版', '2018-04-12 08:26:16');
 INSERT INTO `book` VALUES (64, '我们仨', 2, 1, 10.00, 18.80, 3, '杨绛', '生活·读书·新知三联书店', '1', 9.0, '2003-07', '杨绛的书', '2018-04-12 08:26:21');
@@ -87,7 +86,6 @@ INSERT INTO `book` VALUES (75, '郎咸平说', 5, 1, 10.00, 32.00, 3, '郎咸平
 INSERT INTO `book` VALUES (76, '孩子你慢慢来', 6, 1, 10.00, 28.00, 3, '龙应台', '生活·读书·新知三联书店', '1', 9.0, '2009-12', '好书推荐', '2018-04-12 08:26:55');
 INSERT INTO `book` VALUES (77, '男人这东西', 6, 1, 8.00, 28.00, 3, '渡边淳一', '作家出版社', '1', 7.0, '2010-03', '渡边大神的书', '2018-04-12 08:26:58');
 INSERT INTO `book` VALUES (78, '荒野生存', 6, 1, 19.00, 39.00, 3, '乔恩·克拉考尔', '中国人民大学出版社', '1', 7.0, '2008-08', '已改编成同名电影', '2018-04-12 08:27:02');
-INSERT INTO `book` VALUES (79, '管理学', 8, 1, 40.00, 98.00, 3, '罗宾斯', '中国人民大学出版社', '1', 9.0, '2004-04', '管理学考研必备啊！', '2018-04-12 08:27:05');
 INSERT INTO `book` VALUES (80, '剑桥雅思真题9', 8, 1, 5.00, 15.00, 1, '无', '科学出版社', '1', 9.9, '2014-03', '全新没写过，已分手雅思', '2018-04-12 08:27:07');
 INSERT INTO `book` VALUES (81, '剑桥雅思11', 8, 1, 15.00, 8.00, 1, '无', '中国人民大学出版社', '1', 9.9, '2015-09', '全新没写过的', '2018-04-12 08:27:10');
 INSERT INTO `book` VALUES (82, '顾家北手把手教你雅思写作', 8, 1, 20.00, 55.60, 1, '顾家北', '中国人民大学出版社', '1', 8.0, '2017-09', '有一点点笔记', '2018-04-12 08:27:13');
@@ -95,8 +93,10 @@ INSERT INTO `book` VALUES (83, '雅思王听力语料库', 8, 1, 16.00, 37.50, 1
 INSERT INTO `book` VALUES (84, '时间简史', 9, 1, 15.00, 45.00, 2, '史蒂芬·霍金', '湖南科学技术出版社', '1', 8.0, '2015-04', '霍金大大啊', '2018-04-12 08:27:18');
 INSERT INTO `book` VALUES (85, '万物简史', 9, 1, 11.00, 36.80, 2, '比尔·布莱森', '接力出版社', '1', 6.0, '2005-02', '很好的书', '2018-04-12 08:27:20');
 INSERT INTO `book` VALUES (86, '昆虫记', 9, 1, 9.00, 19.00, 2, '法布尔', '作家出版社', '2', 2.0, '2000-06', '老书了', '2018-04-12 08:27:23');
-INSERT INTO `book` VALUES (87, '黄帝内经', 9, 1, 10.00, 30.00, 3, '王冰', '中医古籍出版社', '1', 1.0, '2003-11', '好', '2018-04-12 08:27:25');
-INSERT INTO `book` VALUES (88, '本草纲目', 9, 1, 3.00, 19.00, 3, '李时珍', '北京出版社', '1', 6.0, '2007-01', '有价值！', '2018-04-12 08:27:29');
+INSERT INTO `book` VALUES (87, '黄帝内经', 3, 1, 10.00, 30.00, 3, '王冰', '中医古籍出版社', '1', 1.0, '2003-11', '好', '2018-04-12 08:27:25');
+INSERT INTO `book` VALUES (94, '三体', 1, 1, 20.00, 58.00, 3, '刘慈欣', '人民出版社', '第2版', 9.9, '2018-06', '很好看的一本中国的科幻小说', '2024-07-29 14:27:51');
+INSERT INTO `book` VALUES (95, '三体', 5, 1, 20.00, 59.00, 3, '刘慈欣', '人民出版社', '第1版', 9.0, '2017-06', '很好看的一本科幻小说，这个一册主要描述的是在大宇宙观下社会', '2024-07-29 14:36:08');
+INSERT INTO `book` VALUES (97, '三体', NULL, 0, 0.00, 0.00, 3, '刘慈欣', '人民出版社', NULL, 0.0, NULL, NULL, '2024-07-29 14:45:59');
 
 -- ----------------------------
 -- Table structure for bookimage
@@ -104,12 +104,12 @@ INSERT INTO `book` VALUES (88, '本草纲目', 9, 1, 3.00, 19.00, 3, '李时珍'
 DROP TABLE IF EXISTS `bookimage`;
 CREATE TABLE `bookimage`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `bid` int(11) DEFAULT NULL,
-  `type` int(1) DEFAULT NULL,
+  `bid` int(11) NULL DEFAULT NULL,
+  `type` int(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_bookimage_book`(`bid`) USING BTREE,
   CONSTRAINT `fk_bookimage_book` FOREIGN KEY (`bid`) REFERENCES `book` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 85 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 92 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bookimage
@@ -133,7 +133,6 @@ INSERT INTO `bookimage` VALUES (16, 16, 0);
 INSERT INTO `bookimage` VALUES (17, 17, 0);
 INSERT INTO `bookimage` VALUES (18, 18, 0);
 INSERT INTO `bookimage` VALUES (19, 19, 0);
-INSERT INTO `bookimage` VALUES (20, 20, 0);
 INSERT INTO `bookimage` VALUES (21, 21, 0);
 INSERT INTO `bookimage` VALUES (58, 62, NULL);
 INSERT INTO `bookimage` VALUES (60, 64, NULL);
@@ -151,7 +150,6 @@ INSERT INTO `bookimage` VALUES (71, 75, NULL);
 INSERT INTO `bookimage` VALUES (72, 76, NULL);
 INSERT INTO `bookimage` VALUES (73, 77, NULL);
 INSERT INTO `bookimage` VALUES (74, 78, NULL);
-INSERT INTO `bookimage` VALUES (75, 79, NULL);
 INSERT INTO `bookimage` VALUES (76, 80, NULL);
 INSERT INTO `bookimage` VALUES (77, 81, NULL);
 INSERT INTO `bookimage` VALUES (78, 82, NULL);
@@ -160,19 +158,28 @@ INSERT INTO `bookimage` VALUES (80, 84, NULL);
 INSERT INTO `bookimage` VALUES (81, 85, NULL);
 INSERT INTO `bookimage` VALUES (82, 86, NULL);
 INSERT INTO `bookimage` VALUES (83, 87, NULL);
-INSERT INTO `bookimage` VALUES (84, 88, NULL);
+INSERT INTO `bookimage` VALUES (84, NULL, NULL);
+INSERT INTO `bookimage` VALUES (85, NULL, NULL);
+INSERT INTO `bookimage` VALUES (88, NULL, NULL);
+INSERT INTO `bookimage` VALUES (89, 94, NULL);
+INSERT INTO `bookimage` VALUES (90, 95, NULL);
+INSERT INTO `bookimage` VALUES (91, 97, NULL);
 
 -- ----------------------------
 -- Table structure for bookinfo
 -- ----------------------------
 DROP TABLE IF EXISTS `bookinfo`;
 CREATE TABLE `bookinfo`  (
-  `id` int(11) DEFAULT NULL,
-  `bid` int(11) DEFAULT NULL,
-  `author` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `press` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `time` datetime(0) DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `id` int(11) NULL DEFAULT NULL,
+  `bid` int(11) NULL DEFAULT NULL,
+  `author` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `press` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `time` datetime NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of bookinfo
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for category
@@ -180,9 +187,9 @@ CREATE TABLE `bookinfo`  (
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `name` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of category
@@ -203,21 +210,23 @@ INSERT INTO `category` VALUES (9, '自然科学 / 医药卫生');
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `studentid` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `name` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `password` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `sex` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `tel` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `address` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `major` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `studentid` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `name` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `password` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `sex` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `tel` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `address` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `major` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, '1505119', '余文乐', '675844', 'm', '13712345678', '22#A425', '15级信息管理与信息系统');
-INSERT INTO `user` VALUES (2, '1505101', '许玮甯', '549256', 'f', '13212345678', '22#B432', '15级信息管理与信息系统');
-INSERT INTO `user` VALUES (3, '1505112', '彭于晏', '123456', 'm', '15812345678', '22#A425', '15级信息管理与信息系统');
+INSERT INTO `user` VALUES (1, '1505119', '余文乐', '675844', 'm', '13712345678', '19-1-15', '计算机科学与技术');
+INSERT INTO `user` VALUES (2, '1505101', '许玮甯', '549256', 'f', '13212345678', '19-1-1', '计算机科学与技术');
+INSERT INTO `user` VALUES (3, '1505112', '彭于晏', '123456', 'm', '15812345678', '19-1-11', '计算机科学与技术');
+INSERT INTO `user` VALUES (6, '1505110', '李xx', '1123456', 'm', '14785209630', '19-1-19', '计算机科学与技术');
+INSERT INTO `user` VALUES (7, '1505107', '李xx', '123456', 'm', '14785209630', '13-3-29', '大数据科学与技术');
 
 SET FOREIGN_KEY_CHECKS = 1;
